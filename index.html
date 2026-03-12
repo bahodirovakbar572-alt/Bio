@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live | Page</title>
+    <title>BIO18 | Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header class="top-nav">
+        <div class="logo">BIO<span>18</span></div>
+        <div class="search-bar">
+            <!-- Qidiruv inputiga 'search-input' ID berildi -->
+            <input type="text" id="search-input" placeholder="Videolarni qidirish...">
+        </div>
+        <div class="user-icon">○</div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+    <nav>
+        <a href="#" data-cat="all" style="color: #fff;">● Home</a>
+        <a href="#" data-cat="trending" style="color: #888;">○ Trending</a>
+        <a href="#" data-cat="library" style="color: #888;">○ Library</a>
+    </nav>
+</aside>
 
 
-
-
-
-
+        <main id="video-grid" class="content-grid"></main>
+    </div>
 
     <script src="script.js"></script>
 </body>
