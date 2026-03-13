@@ -1,6 +1,6 @@
 // 1. Ma'lumotlar
 const videos = [
-    { id: "1", title: "Minimalist Coding 2024", url: "https://youtu.be/R-HQssfwzJg?si=_Ek13kyQWbFkwxdt", category: "trending" },
+    { id: "1", title: "Minimalist Coding 2024", url: "https://s8.faylmovi.ru/tarjima_kinolar/Titanik_720.mp4", category: "trending" },
     { id: "2", title: "Future of JavaScript", url: "https://www.youtube.com", category: "library" },
     { id: "3", title: "Aesthetic Night Walk", url: "https://www.youtube.com", category: "trending" }
 ];
