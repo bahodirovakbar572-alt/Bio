@@ -5,6 +5,7 @@ const videos = [
     { id: "3", title: "Aesthetic Night Walk", url: "https://www.youtube.com", category: "trending" }
 ];
 
+
 const shorts = [
     { id: "s1", title: "Python in 60s", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" },
     { id: "s2", title: "New Desk Setup", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" },
