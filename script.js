@@ -6,10 +6,10 @@ const videos = [
 ];
 
 const shorts = [
-    { id: "s1", title: "Python in 60s", url: "https://www.youtube.com" },
-    { id: "s2", title: "New Desk Setup", url: "https://www.youtube.com" },
-    { id: "s3", title: "CSS Trick", url: "https://www.youtube.com" },
-    { id: "s4", title: "Morning Routine", url: "https://www.youtube.com" }
+    { id: "s1", title: "Python in 60s", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" },
+    { id: "s2", title: "New Desk Setup", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" },
+    { id: "s3", title: "CSS Trick", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" },
+    { id: "s4", title: "Morning Routine", url: "https://www.youtube.com/shorts/s5Ijz7FIKdE?feature=share" }
 ];
 
 // 2. YouTube ID olish
