@@ -123,3 +123,38 @@ window.onload = () => {
     if (document.getElementById('video-grid')) renderVideos();
     if (document.getElementById('player-wrapper')) displayVideo();
 };
+// 9. QIDIRUV FUNKSIYASI (Search)
+const searchInput = document.getElementById('search-input');
+
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const grid = document.getElementById('video-grid');
+        
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        // Videolarni qidiruvga qarab filtrlash
+        const filtered = videos.filter(v => 
+            v.title.toLowerCase().includes(query) || 
+            v.category.toLowerCase().includes(query)
+        );
+
+        // Agar natija topilsa, ekranga chiqaramiz
+        if (filtered.length > 0) {
+            filtered.forEach(v => {
+                const videoId = extractID(v.url);
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="thumb" style="background-image: url('https://img.youtube.com{videoId}/hqdefault.jpg'); background-size: cover; background-position: center; border-radius: 12px; aspect-ratio: 16/9;"></div>
+                    <div class="info-title" style="margin-top:10px; font-weight:600;">${v.title}</div>
+                `;
+                card.onclick = () => window.location.href = `video.html?id=${v.id}`;
+                grid.appendChild(card);
+            });
+        } else {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--gray);">Kechirasiz, hech narsa topilmadi... 😕</div>`;
+        }
+    });
+}
