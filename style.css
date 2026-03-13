@@ -1,9 +1,13 @@
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 20px;
+
+    min-width: 320px;   /* telefonlar uchun minimal */
+    max-width: 1600px;  /* juda katta monitor uchun limit */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 { font-weight: 300; letter-spacing: 2px; text-align: center; }
@@ -16,11 +20,30 @@ h1 { font-weight: 300; letter-spacing: 2px; text-align: center; }
     margin: 40px auto;
 }
 
+.content-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 25px;
+
+    min-width: 300px;
+    max-width: 1400px;
+    margin: auto;
+}
+
 .video-card {
     background: #111;
     border: 1px solid #333;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.video-focus-container {
+    max-width: 1100px;
+    min-width: 300px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
 .video-card:hover { border-color: #fff; }
