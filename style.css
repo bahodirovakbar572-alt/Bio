@@ -1,154 +1,213 @@
+    :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --accent: #ff0000;
+    --text: #ffffff;
+    --gray: #aaa;
+    --border: rgba(255, 255, 255, 0.1);
+    --header-h: 70px;
+    --sidebar-w: 240px;
+}
+
+* { box-sizing: border-box; } /* Padding kenglikka ta'sir qilmasligi uchun */
+
 body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', sans-serif;
     margin: 0;
-
-    min-width: 320px;   /* telefonlar uchun minimal */
-    max-width: 1600px;  /* juda katta monitor uchun limit */
+    max-width: 1920px;
     margin-left: auto;
     margin-right: auto;
+    overflow-x: hidden;
 }
 
-h1 { font-weight: 300; letter-spacing: 2px; text-align: center; }
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 40px auto;
+/* Header */
+.top-nav {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
 }
 
+.search-bar input {
+    background: #000;
+    border: 1px solid var(--border);
+    color: #fff;
+    padding: 10px 25px;
+    width: clamp(150px, 30vw, 500px);
+    border-radius: 25px;
+    outline: none;
+}
+
+/* Layout */
+.main-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Kartalar sig'masa pastga tushishi uchun muhim */
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-w);
+    padding: 20px 15px;
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+}
+
+.sidebar a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    padding: 12px 20px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover { background: rgba(255,255,255,0.1); }
+
+/* GRID - KARTALARNI PASTA TUSHIRUVCHI QISM */
 .content-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Kartalar kamida 280px bo'ladi, sig'masa avtomat pastga tushadi */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
     gap: 25px;
     padding: 25px;
-
-    min-width: 300px;
-    max-width: 1400px;
-    margin: auto;
+    min-width: 300px; /* Grid juda qisqarib ketmasligi uchun */
 }
 
-.video-card {
-    background: #111;
-    border: 1px solid #333;
+/* Video Card */
+.card {
     cursor: pointer;
-    transition: 0.3s;
-}
-
-.video-focus-container {
-    max-width: 1100px;
-    min-width: 300px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.video-card:hover { border-color: #fff; }
-
-.thumbnail {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #222;
+    animation: fadeInUp 0.6s ease;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 
-.video-info { padding: 15px; font-size: 0.9rem; }
+.thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+}
 
-/* Player Page */
-.hidden { display: none; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-#player-page {
+.info-title {
+    margin: 12px 0 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* RESPONSIVE - EKRAN KICHRAYGANDA */
+@media (max-width: 850px) {
+    .main-wrapper { flex-direction: column; }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        display: flex;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 10px;
+    }
+
+    .sidebar a {
+        white-space: nowrap;
+        margin-bottom: 0;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-grid {
+        grid-template-columns: 1fr; /* Telefonda bitta ustun */
+        padding: 15px;
+    }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shorts Grid - Kartalar uzunchoq bo'lishi uchun */
+.shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Shorts kichikroq bo'ladi */
+    gap: 15px;
+    padding: 20px;
+}
+
+.shorts-card .thumb {
+    aspect-ratio: 9 / 16; /* Tikka format */
+    border-radius: 12px;
+}
+
+.shorts-card .info-title {
+    font-size: 0.85rem;
+    text-align: center;
+}
+#shorts-player-container {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100vh;
     background: #000;
-    z-index: 100;
+    z-index: 2000;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; /* Skrollni avtomat ushlab qoladi */
+}
+
+#shorts-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.back-btn {
-    background: none; border: 1px solid #fff; color: #fff;
-    padding: 10px 20px; margin: 20px; cursor: pointer;
-}
-
-#video-container { width: 80%; max-width: 1000px; aspect-ratio: 16/9; }
-
-iframe { width: 100%; height: 100%; border: none; }
-:root { --bg: #0a0a0a; --card-bg: #141414; --text: #ffffff; --gray: #888; --border: #222; }
-
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; }
-
-/* Header */
-.top-nav { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 25px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
-.logo { font-weight: 800; letter-spacing: 1px; font-size: 1.2rem; }
-.logo span { font-weight: 300; color: var(--gray); }
-.search-bar input { background: #000; border: 1px solid var(--border); color: #fff; padding: 8px 20px; width: 300px; border-radius: 20px; }
-
-/* Layout */
-.main-wrapper { display: flex; }
-.sidebar { width: 220px; padding: 20px; height: calc(100vh - 60px); border-right: 1px solid var(--border); position: sticky; top: 60px; }
-.sidebar a { display: block; color: var(--gray); text-decoration: none; padding: 12px; margin-bottom: 5px; transition: 0.3s; }
-.sidebar a:hover, .sidebar a.active { color: #fff; background: #1a1a1a; border-radius: 8px; }
-
-/* Grid */
-.content-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 25px; }
-.card { cursor: pointer; transition: transform 0.2s; }
-.card:hover { transform: translateY(-5px); }
-.thumb { width: 100%; aspect-ratio: 16/9; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
-.info-title { margin-top: 12px; font-weight: 600; font-size: 0.95rem; }
-.info-meta { color: var(--gray); font-size: 0.8rem; margin-top: 5px; }
-
-/* Video Player Page */
-.video-focus-container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-#player-wrapper { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-iframe { width: 100%; height: 100%; border: none; }
-#video-title { margin-top: 20px; font-size: 1.5rem; }
-.back-btn { color: var(--text); text-decoration: none; border: 1px solid var(--border); padding: 5px 15px; border-radius: 5px; }
-/* Pleyer konteynerini qora qilib, chetlarini tozalaymiz */
-#player-wrapper {
+.short-video-slide {
     width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-    border-radius: 12px;
-    overflow: hidden;
+    height: 100vh;
+    scroll-snap-align: start; /* Har bir video ekran boshida to'xtaydi */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    /* YouTube logotipini biroz chetga surish uchun vizual hiyla (ixtiyoriy) */
-}
-.sidebar a {
-    cursor: pointer;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+.short-video-slide iframe {
+    height: 90vh; /* Tikka format */
+    aspect-ratio: 9/16;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(255,255,255,0.1);
 }
 
-.sidebar a.active {
-    background: #1a1a1a;
-    color: #fff;
-    font-weight: 600;
+.close-shorts {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 2100;
+    background: rgba(255,255,255,0.2);
+    color: white; border: none;
+    font-size: 35px; border-radius: 50%;
+    cursor: pointer; width: 60px; height: 60px;
 }
 
-/* Kichik animatsiya */
-.card {
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.hidden { display: none !important; }
